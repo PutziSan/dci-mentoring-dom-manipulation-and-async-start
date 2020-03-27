@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   setTimeout(() => {
+      //     console.log("this is called after 3000ms");
+      //     // in this function, I want to create another timeout,
+      //     // which is called after another second:
+      //     setTimeout(() => {
+      //       console.log(
+      //         "this is called after another 3000m, so in total after 6000ms"
+      //       );
+      //       // in this function, I want to create another timeout,
+      //       // which is called after another 3000 ms:
+      //       setTimeout(() => {
+      //         console.log(
+      //           "this is called after another 3000m, so in total after 9000ms"
+      //         );
+      //       }, 3000);
+      //       //
+      //     }, 3000);
+      //     //
+      //   }, 3000);
+
+      // wait the amount of milliseconds:
+      function pause(ms) {
+        // directly return the promise, but the promise
+        // will only be resolved, when the setTimeout is finished:
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve();
+          }, ms);
+        });
+      }
+
+      function russianRoulettePause(ms) {
+        // directly return the promise, but the promise
+        // will only be resolved, when the setTimeout is finished:
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (Math.random() > 0.5) {
+              reject(new Error("bad luck my friend"));
+            }
+            resolve();
+          }, ms);
+        });
+      }
+
+      russianRoulettePause(3000)
+        .then(() => {
+          console.log("the first code after 3 seconds");
+          if (Math.random() > 0.5) {
+            const str = "";
+            // this will result in an error, because this function does not exist
+            str.toasdqaweasdd();
+          }
+          return russianRoulettePause(3000);
+        })
+        .then(() => {
+          console.log(
+            "the next code after the next 3 seconds, in total 6 seconds"
+          );
+          return russianRoulettePause(3000);
+        })
+        .then(() => {
+          console.log(
+            "the next code after the next 3 seconds, in total 9 seconds"
+          );
+          console.log("DONE");
+        })
+        .catch(error => {
+          console.log("an error occured :/");
+          console.error(error);
+        });
+    </script>
+  </body>
+</html>

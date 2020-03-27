@@ -1,0 +1,27 @@
+.button-placement {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* START POP UP CSS */
+.pop-up-container {
+  position: relative;
+}
+
+.pop-up {
+  /* per default, be hidden: */
+  display: none;
+
+  position: absolute;
+  /* right: 0, because the corresponding
+   button-element is right aligned */
+  right: 0;
+  /* top 2rem, so that the content is not over the button */
+  top: 2rem;
+
+  background-color: white;
+  padding: 3rem;
+
+  /* box-shadow, just for the cosmetics */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}

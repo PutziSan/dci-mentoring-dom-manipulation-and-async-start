@@ -1,0 +1,43 @@
+.modal {
+  /* we should use fixed, so that the content is always over the document
+  (with position absolute and the user scrolled down, it can happen, that
+  the content of the document is larger than the modal)
+  */
+  position: fixed;
+  /* left 0 and right 0 with position absolute:
+    this will make the content of the modal full width
+    */
+  left: 0;
+  right: 0;
+  /* top 0 and bottom 0 => this will make the 
+  content of the modal full height */
+  top: 0;
+  bottom: 0;
+  /* left,right,top and bottomn 0 is also called "inset" */
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  /* opacity 0 to be not visible at the beginning */
+  opacity: 0;
+  /* start as "not visible", so that we can click the normal document,
+   when the modal is transparent */
+  visibility: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* transition for the visual animation of "fading in" and "fading out"
+  this will animate the opacity property from 0 to 1 (or 1 to 0)
+  */
+  transition: all 0.25s ease-in-out;
+}
+
+.modal-content {
+  /* background is the shorthand syntax for
+    alls background-* stuff (backgroound-color,
+    background-image, ...)
+    */
+  background: white;
+  padding: 2rem;
+}

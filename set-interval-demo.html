@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>the intervalid:</p>
+    <p id="interval-id"></p>
+    <p id="interval-id-2"></p>
+    <script>
+      const intervalId = setInterval(() => {
+        console.log("interval");
+        clearInterval(intervalId);
+        console.log("first interval will not be executed anymore");
+      }, 1000);
+      const anotherInterval = setInterval(() => {
+        console.log("interval 2");
+      }, 1000);
+      document.getElementById("interval-id").innerHTML = intervalId;
+      document.getElementById("interval-id-2").innerHTML = anotherInterval;
+    </script>
+  </body>
+</html>

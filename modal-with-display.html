@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="modal.css" />
+  </head>
+  <body>
+    <h1>Mentoring</h1>
+
+    <h2>fun with modals</h2>
+
+    <ul>
+      <li>a modal is a screen which lays before the other elements</li>
+      <li>it is often used to break out the normal flow on a website</li>
+      <li>the modal needs (most of the time) some interaction from the user</li>
+    </ul>
+
+    <div>
+      <button id="show-modal-button">show the modal!</button>
+    </div>
+
+    <div id="my-first-modal" class="modal">
+      <div class="modal-content">
+        <div>my cool modal content</div>
+        <button id="my-first-modal-close-button">
+          close
+        </button>
+      </div>
+    </div>
+    <script>
+      // add the event listener for the close-button click
+      document
+        .getElementById("my-first-modal-close-button")
+        .addEventListener("click", () => {
+          // make the modal disappearing: change the display: flex to display: none
+          document.getElementById("my-first-modal").style.display = "none";
+        });
+      // add ther event listener for the show modal button click
+      document
+        .getElementById("show-modal-button")
+        .addEventListener("click", () => {
+          // make the modal appearing again, use the same
+          // display-value like for the class of .modal (flex not block!)
+          document.getElementById("my-first-modal").style.display = "flex";
+        });
+    </script>
+  </body>
+</html>

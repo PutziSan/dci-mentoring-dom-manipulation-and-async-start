@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="my-countdown" style="font-size: 10rem;">
+      10
+    </p>
+    <script>
+      // this countdown will be changed by different functions
+      // this is the "state of your application"
+      let countdown = 10;
+      // with the render function the current state will be displayed
+      // on the document:
+      function render() {
+        document.getElementById("my-countdown").innerHTML = countdown;
+      }
+
+      // wait the amount of milliseconds:
+      function pause(ms) {
+        // directly return the promise, but the promise
+        // will only be resolved, when the setTimeout is finished:
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve();
+          }, 1000);
+        });
+      }
+
+      // the countdownLoop is a function which is called again and again
+      // until the countdown ends:
+      function countdownLoop() {
+        // wait 1 second and substract 1 to the current countdown
+        // then render my document with the new countdown
+        // and then start the countdownLoop again,
+        // but only if the current countdown is greater than 0
+        pause(1000).then(() => {
+          countdown = countdown - 1;
+          if (countdown > 0) {
+            render();
+            countdownLoop();
+          } else {
+            // not calling the countdownLoop again, this stops the loop!
+            document.getElementById("my-countdown").innerHTML = "💣";
+          }
+        });
+      }
+      // initially start the countdown loop
+      countdownLoop();
+
+      // just for demo, promise example with async/await
+
+      // the countdownLoop is a function which is called again and again
+      // until the countdown ends:
+      async function countdownLoopWithAsync() {
+        // wait 1 second and substract 1 to the current countdown
+        // then render my document with the new countdown
+        // and then start the countdownLoop again,
+        // but only if the current countdown is greater than 0
+        await pause(1000);
+        // this code below will be executed after the promise above is resolved:
+        countdown = countdown - 1;
+        if (countdown > 0) {
+          render();
+          countdownLoop();
+        } else {
+          // not calling the countdownLoop again, this stops the loop!
+          document.getElementById("my-countdown").innerHTML = "💣";
+        }
+      }
+    </script>
+  </body>
+</html>

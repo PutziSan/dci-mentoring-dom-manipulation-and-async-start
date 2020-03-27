@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="pop-up-demo.css" />
+  </head>
+  <body>
+    <h1>my cool pop up demo</h1>
+
+    <p>some content</p>
+
+    <div class="button-placement">
+      <button id="open-pop-up-button">
+        open the pop up
+      </button>
+      <div class="pop-up-container">
+        <div id="my-pop-up" class="pop-up">
+          content
+        </div>
+      </div>
+    </div>
+    <script>
+      document
+        .getElementById("open-pop-up-button")
+        .addEventListener("click", e => {
+          document.getElementById("my-pop-up").style.display = "block";
+          // stop propagation so that the global click handler
+          // will not close the element immediately after:
+          e.stopPropagation();
+        });
+      // add another event handler for closing the pop up
+      // when clicking outside the pop up content,
+      // it should close the pop up:
+      document.addEventListener("click", () => {
+        document.getElementById("my-pop-up").style.display = "none";
+      });
+      document.getElementById("my-pop-up").addEventListener("click", e => {
+        // when clicking inside the content, the content should not disappear:
+        // so we will not give the event to the parent, and the global
+        // click handler will not be fired
+        e.stopPropagation();
+      });
+    </script>
+
+    <p>some other content</p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus ipsa
+      eius neque, cum ipsam officia, animi pariatur expedita doloremque quidem
+      error exercitationem deserunt atque reiciendis voluptatem doloribus
+      distinctio cupiditate. Similique?
+    </p>
+  </body>
+</html>

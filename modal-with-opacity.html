@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="modal.css" />
+  </head>
+  <body>
+    <h1>Mentoring</h1>
+
+    <h2>fun with modals</h2>
+
+    <ul>
+      <li>a modal is a screen which lays before the other elements</li>
+      <li>it is often used to break out the normal flow on a website</li>
+      <li>the modal needs (most of the time) some interaction from the user</li>
+    </ul>
+
+    <div>
+      <button id="show-modal-button">show the modal!</button>
+    </div>
+
+    <div style="font-size: 2rem;">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis omnis
+      maiores alias distinctio ratione, quasi dicta voluptatibus id perspiciatis
+      nesciunt vel porro harum amet beatae! Quam optio maiores sapiente
+      excepturi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
+      odio earum sint aperiam consectetur, fugiat esse explicabo facilis eius
+      quia? Totam magnam fugiat sapiente molestias enim reprehenderit ipsum,
+      aliquam culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Est asperiores, fuga dolore harum vel quos mollitia atque minus velit
+      fugiat exercitationem hic inventore nulla nostrum at quia dolores maiores
+      officiis!
+    </div>
+
+    <h2>Pop up</h2>
+
+    <p>
+      a pop up, like a modal, is an element which breaks out of the normal flow
+      of your website. But a pop up does not need the attention of the user. The
+      user is allowed to interact with your website (do not disable the complete
+      website)
+    </p>
+
+    <!-- the modal is not the content of the normal document-flow,
+    you break out of the flow with position absolute (via css)
+    -->
+    <div id="my-first-modal" class="modal">
+      <div id="my-first-modal-content" class="modal-content">
+        <div>my cool modal content</div>
+        <button id="my-first-modal-close-button">
+          close
+        </button>
+      </div>
+    </div>
+    <script>
+      // add the event listener for the close-button click
+      document
+        .getElementById("my-first-modal-close-button")
+        .addEventListener("click", () => {
+          // now we want to use opacity and not the display-property, because
+          // opacity can be used with a transition (animating)
+          // opacity: 0 means completely transparent (not visible)
+          document.getElementById("my-first-modal").style.opacity = 0;
+          // also change the visibility back to "hidden",
+          // so we can click the other elements on the document
+          document.getElementById("my-first-modal").style.visibility = "hidden";
+          // get back normal behaviour of scrolling
+          //  => set overflow on the body to auto
+          document.body.style.overflow = "auto";
+        });
+      // add the event listener for the show modal button click
+      document
+        .getElementById("show-modal-button")
+        .addEventListener("click", () => {
+          // opacity 1 means completely visible:
+          document.getElementById("my-first-modal").style.opacity = 1;
+          // also change the visibility to "visible"
+          document.getElementById("my-first-modal").style.visibility =
+            "visible";
+          // when the modal is open, the normal content should not be able to scroll
+          // so we hide the scroll bar with overflow hidden:
+          document.body.style.overflow = "hidden";
+        });
+
+      // add another event handler for closing the modal
+      // when clicking outside the modal content:
+      document
+        .getElementById("my-first-modal")
+        .addEventListener("click", () => {
+          // close the modal (same logic like above on close click)´
+          // you could also create  function "closeModal" for this:
+          document.getElementById("my-first-modal").style.opacity = 0;
+          document.getElementById("my-first-modal").style.visibility = "hidden";
+          document.body.style.overflow = "auto";
+        });
+      // add another event handler to check if the content is clicked and
+      // do a `stopPropagation` to stop bubbling up the event to the parent
+      document.getElementById("my-first-modal-content").addEventListener(
+        "click",
+        // the event variable is very often used with the name "e"
+        event => {
+          // say that the click-event should stop here,
+          // so the parent element (in our case "my-first-modal")
+          // will not get the event
+          event.stopPropagation();
+        }
+      );
+    </script>
+  </body>
+</html>
